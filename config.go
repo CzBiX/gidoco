@@ -16,6 +16,7 @@ type Config struct {
 	Port      int
 	DryRun    bool
 	NoStartUp bool
+	AlwaysUp  bool
 
 	EncryptionEnabled bool
 

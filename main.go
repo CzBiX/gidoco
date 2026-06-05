@@ -85,7 +85,9 @@ func initialize(ctx context.Context, config *Config) error {
 		return nil
 	}
 
-	if !freshClone {
+	// AlwaysUp: skip runUpdate (which only deploys changed projects) and
+	// fall through to deploy all projects, same as a fresh clone.
+	if !freshClone && !config.AlwaysUp {
 		logger.InfoContext(ctx, "running startup update")
 		return runUpdate(repo, config)
 	}
