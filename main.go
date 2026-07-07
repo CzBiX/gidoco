@@ -34,16 +34,19 @@ func main() {
 	slog.Info("working on", "repo", config.RepoRoot)
 
 	ctx := context.Background()
-	if err := initialize(ctx, config); err != nil {
-		slog.Error("initialization failed", "error", err)
-		os.Exit(1)
-	}
 
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 
+	// ready is closed once initialize finishes; webhook goroutines wait on
+	// it so they never run git/compose work before the repo is cloned or
+	// race with initialize's batchUpProjects.
+	ready := make(chan struct{})
+
 	webhookHandler := func(c *gin.Context) {
 		go func() {
+			<-ready
+
 			repo, err := git.PlainOpen(config.RepoRoot)
 			if err != nil {
 				slog.Error("error opening repo", "error", err)
@@ -64,6 +67,19 @@ func main() {
 	} else {
 		r.POST("/webhook/:hookId", webhookHandler)
 	}
+
+	// Start listening immediately and run initialization in the background.
+	// On failure we exit the process: compose.yml has restart: unless-stopped,
+	// so the container restarts and retries the clone. Webhooks stay gated
+	// behind `ready` until initialization succeeds.
+	go func() {
+		if err := initialize(ctx, config); err != nil {
+			slog.Error("initialization failed", "error", err)
+			os.Exit(1)
+		}
+		close(ready)
+		slog.Info("initialization completed, webhook is now active")
+	}()
 
 	addr := fmt.Sprintf(":%d", config.Port)
 	slog.Info("listening", "addr", "http://"+addr)
