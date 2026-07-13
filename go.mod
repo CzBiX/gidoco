@@ -3,7 +3,7 @@ module gidoco
 go 1.25.5
 
 require (
-	github.com/compose-spec/compose-go/v2 v2.10.1
+	github.com/compose-spec/compose-go/v2 v2.13.0
 	github.com/docker/cli v29.3.1+incompatible
 	github.com/docker/compose/v5 v5.1.1
 	github.com/getsops/sops/v3 v3.12.2
