@@ -8,7 +8,7 @@ require (
 	github.com/docker/compose/v5 v5.1.1
 	github.com/getsops/sops/v3 v3.12.2
 	github.com/gin-gonic/gin v1.12.0
-	github.com/go-git/go-billy/v6 v6.0.0-alpha.1
+	github.com/go-git/go-billy/v6 v6.0.0-alpha.2
 	github.com/go-git/go-git/v6 v6.0.0-alpha.4
 	github.com/spf13/viper v1.21.0
 )
@@ -243,7 +243,7 @@ require (
 	golang.org/x/net v0.54.0 // indirect
 	golang.org/x/oauth2 v0.35.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
-	golang.org/x/sys v0.44.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
 	golang.org/x/term v0.43.0 // indirect
 	golang.org/x/text v0.37.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
