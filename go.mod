@@ -4,7 +4,7 @@ go 1.26.3
 
 require (
 	github.com/compose-spec/compose-go/v2 v2.15.0
-	github.com/docker/cli v29.7.2+incompatible
+	github.com/docker/cli v29.8.1+incompatible
 	github.com/docker/compose/v5 v5.5.1
 	github.com/getsops/sops/v3 v3.13.3
 	github.com/gin-gonic/gin v1.12.0
