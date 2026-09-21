@@ -9,7 +9,7 @@ require (
 	github.com/getsops/sops/v3 v3.13.3
 	github.com/gin-gonic/gin v1.12.0
 	github.com/go-git/go-billy/v6 v6.0.0-alpha.2
-	github.com/go-git/go-git/v6 v6.0.0-alpha.4
+	github.com/go-git/go-git/v6 v6.0.0-alpha.5
 	github.com/spf13/viper v1.21.0
 )
 
